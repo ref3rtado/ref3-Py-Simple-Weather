@@ -7,4 +7,5 @@ This is just a side project to practice with the following:
 
 ***Side project goal***
 -Make 1x commit per day. Between work and school full time, easier said than done.
--General experimentation and code optimization
+-General experimentation and code optimization.
+-Practice before taking on other eel projects which will wrap much larger programs.
