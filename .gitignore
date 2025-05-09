@@ -1,0 +1,5 @@
+weather-venv/
+keys.json
+__pycache__/
+*.py[cod]
+*.pyo
