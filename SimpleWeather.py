@@ -2,6 +2,7 @@ import eel
 
 eel.init("web")
 
+##To use a return value in the javascript, it needs to be set up as an async function. Be sure to use ()()##
 @eel.expose
 def poke_html():
     return "Hi, i'm a snake."

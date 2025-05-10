@@ -1,6 +1,7 @@
 console.log("Script loaded");
 
-//TODO: See if I can set up a Promise decorator function
+//If grabbing a value from python function, it needs to be an async function
+//If you want to use the value in a variable, you need to use await
 
 async function poke_snake() {
     let response = await eel.poke_html()();
