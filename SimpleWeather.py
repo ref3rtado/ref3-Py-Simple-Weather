@@ -1,4 +1,6 @@
+import os
 import eel
+import GrabWeather
 
 eel.init("web")
 
@@ -12,6 +14,9 @@ def poke_html():
 def get_zipcode(zipcode):
     # Get the zipcode from the html/js
     print(zipcode)
+
+def get_weather_json(zipcode):
+    pass
 
 if __name__ == "__main__":
     eel.start("index.html", mode="firefox", size=(800, 600))
