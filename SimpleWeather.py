@@ -1,4 +1,3 @@
-import os
 import eel
 import GrabWeather
 
@@ -10,13 +9,16 @@ def poke_html():
     #This was just a test to find out how eel passes data
     return "Hi, i'm a snake."
 
+# Get the zipcode from the html/js
 @eel.expose
 def get_zipcode(zipcode):
-    # Get the zipcode from the html/js
-    print(zipcode)
+    # Call the weather api. Returns json object
+    raw_weather_json = GrabWeather.get_weather_json(zipcode)
+    
+    # TODO: Parse and format the json data for the html
+    print("raw_weather_json: ", raw_weather_json)
+    eel.getRawJSON(raw_weather_json)
 
-def get_weather_json(zipcode):
-    pass
-
+# Initiate the webUI #
 if __name__ == "__main__":
     eel.start("index.html", mode="firefox", size=(800, 600))

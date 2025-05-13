@@ -16,6 +16,12 @@ function passZipcode(zipcode) {
 let testButton = document.getElementById("test-button")
     .addEventListener("click", poke_snake);
 */
+
+eel.expose(getRawJSON);
+function getRawJSON(data) {
+    console.log("Raw JSON data:", data);
+}
+
 let zipButton = document.getElementById("get-weather")
     .addEventListener("click", function() {
         let zip = document.getElementById("zipcode").value;
