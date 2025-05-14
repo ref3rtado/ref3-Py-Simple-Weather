@@ -1,14 +1,14 @@
 import requests
 import json
+import logging
+import sys
 
-def test_func(zipcode, request_params, key):
-    url = "http://api.weatherapi.com/v1"
-    for param in request_params:
-        
-        url += param
-    url += "?key=" + key
-    url += "&q=" + zipcode
-    print(url)
+# Set up logging
+logging.basicConfig(
+    level=logging.INFO, 
+    stream=sys.stdout, 
+    format='%(asctime)s - %(levelname)s - %(filename)s - %(message)s')
+logger = logging.getLogger(__name__)
 
 def get_api_key():
     with open("keys.json", "r") as file:
@@ -33,20 +33,19 @@ def make_request(url):
     try:
         response = requests.get(url)
         if response.status_code == 200:
-            print("Request successful")
+            logger.info("Request successful")
             return response.json()
         else:
-            print("Error: ", response.status_code)
+            logger.critical("Error: ", response.status_code)
             return response.status_code
     except requests.exceptions.RequestException as e:
-        print("Request failed: ", e)
+        logger.critical("Request failed: ", e)
         return response.status_code
 
 if __name__ == "__main__":
     # This is just set up to test parsing json data and appending a key to the url. 
     # It's  intended for SimpleWeather.py to call the main() function with user defined values. 
+    logger.info("Sending test values")
     zipcode = "90210"
-    url = "http://api.weatherapi.com/v1/current.json"
-    api_key = get_api_key()
     request_params = ["/current.json"]
-    test_func(zipcode, request_params, api_key)
+    get_weather_json(zipcode, request_params)

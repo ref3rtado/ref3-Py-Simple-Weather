@@ -1,6 +1,16 @@
 import eel
 import GrabWeather
+import logging
+import sys
 
+# Set up logging
+logging.basicConfig(
+    level=logging.INFO, 
+    stream=sys.stdout, 
+    format='%(asctime)s - %(levelname)s - %(filename)s - %(message)s')
+logger = logging.getLogger(__name__)
+
+# This tells eel where to find the front-end files
 eel.init("web")
 
 ##To use a return value in the javascript, it needs to be set up as an async function. Be sure to use ()()##
@@ -21,4 +31,5 @@ def get_zipcode(zipcode):
 
 # Initiate the webUI #
 if __name__ == "__main__":
+    logger.info("Starting SimpleWeather.py")
     eel.start("index.html", mode="firefox", size=(800, 600))
