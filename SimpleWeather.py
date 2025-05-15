@@ -27,8 +27,26 @@ def get_zipcode(zipcode):
     
     # TODO: Parse and format the json data for the html
     print("raw_weather_json: ", raw_weather_json)
-    eel.getRawJSON(raw_weather_json)
+    parse_json(raw_weather_json)
 
+#TODO: JavaScript should tell python what data it wants to display, pass it as an argument, which will return paired down map of relevant data
+    #The JavaScript should translate the html select-options to the keys in the json object, and pass values(keys) to this funciton
+def parse_json(raw_json):
+    relevant_data = {}
+    relevant_data['location'] = [
+        raw_json['location']['name'], 
+        raw_json['location']['region'], 
+        raw_json['location']['country']
+        ]
+    relevant_data['temperature'] = [
+        raw_json['current']['temp_c'], 
+        raw_json['current']['temp_f']
+        ]
+    relevant_data['overall_condition'] = [
+        raw_json['current']['condition']['text'], 
+        raw_json['current']['condition']['icon']
+        ]
+    #TODO: Make an eel-exposed JavaScript function to send this data to
 # Initiate the webUI #
 if __name__ == "__main__":
     logger.info("Starting SimpleWeather.py")
