@@ -47,6 +47,8 @@ def parse_json(raw_json):
         raw_json['current']['condition']['icon']
         ]
     #TODO: Make an eel-exposed JavaScript function to send this data to
+    eel.getRelevantData(relevant_data)
+
 # Initiate the webUI #
 if __name__ == "__main__":
     logger.info("Starting SimpleWeather.py")
