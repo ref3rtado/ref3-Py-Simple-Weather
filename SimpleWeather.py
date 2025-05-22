@@ -41,7 +41,7 @@ def parse_json(raw_json):
         raw_json['location']['country']
         ]
     location_info['local_time'] = [
-        raw_json['current']['localtime_epoch'],
+        raw_json['location']['localtime_epoch'],
         raw_json['location']['tz_id']
         ]
     quick_look_weather['temperature'] = [
@@ -78,7 +78,7 @@ def parse_json(raw_json):
         ]
     #Put in the payload and send it to the front-end
     payload = [location_info, quick_look_weather, detailed_weather] 
-    eel.getRelevantData(payload)
+    eel.getPythonData(payload)
 
 # Initiate the webUI #
 if __name__ == "__main__":

@@ -14,27 +14,38 @@ function passZipcode(zipcode) {
 }
 
 //Currently just passing location data for testing purposes
-eel.expose(getRelevantData);
-function getRelevantData(data) {
-    let location = data.location;
-    let temperature = data.temperature;
-    let condition = data.overall_condition;
+eel.expose(getPythonData);
+function getPythonData(data) {
+    let locationData = data[0];
+    let quickLookData = data[1];
+    let detailedWeatherData = data[2];
 
-    showLocationData(location);
+    pushLocationData(locationData);
 }
 
-//locationData is an array. It should always be [0]==City Name, [1]==State, [2]==Country
 //TODO: Research logging equivalent in JS
-function showLocationData(locationData) {
-    let locationName = document.getElementById("location-string");
-    let locationString = `${locationData[0]}, ${locationData[1]}, ${locationData[2]}`;
+function pushLocationData(locationData) {
+    //locationData is a map with arrays as values:
+        //locationData.location ==> geographic location | [0] = city, [1] = state, [2] = country
+        //locationData.local_time ==> [0] = epoch time of when data was pulled, [1] = timezone
+    console.log(
+        "Location data:", locationData, '\n',
+        "City name:", locationData.location[0], '\n',
+        "State name:", locationData.location[1], '\n',
+        "Country name:", locationData.location[2], '\n',
+    );
+    //Set up the location string to send to the HTML
+    let locationHTML = document.getElementById("location-string");
+    let cityName = locationData.location[0];
+    let stateName = locationData.location[1];
+    let countryName = locationData.location[2];
+    let locationString = `${cityName}, ${stateName}, ${countryName}`;   
     
-    console.log("Location data:", locationData);
-    console.log("City name:", locationData[0]);
-    console.log("State name:", locationData[1]);
-    console.log("Country name:", locationData[2]);
-    
-    locationName.innerHTML = locationString;
+    //TODO: Create time information container in HTML
+    //TODO: Parse time data and pass to the relevant HTML element
+
+    //Pass data to the HTML element
+    locationHTML.innerHTML = locationString;
 }
 
 let zipButton = document.getElementById("get-weather")
