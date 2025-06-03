@@ -24,15 +24,38 @@
     <main>
         <!-- TODO: Pass json data to this element -->
         <div id="user-location">
-            <h3 id="location">Location: 
-                <span id="location-string"></span>
-            </h3>  
+            <h2 id="location">
+                <span id="location-string" class="location-data"></span>
+            </h2>  
+            <h3 id="time-data">Last Updated:
+                <span id="time-string" class="location-data"></span>
+            </h3>
         </div>
-        <div id="weather">
-            <h3>Weather</h3>
-            <p id="weather-condition"></p>
-            <p id="weather-temp-c"></p>
-            <p id="weather-temp-f"></p>
+        <div id="quick-weather">
+            <h2>Weather</h2>
+            <div id="weather-condition">
+                <span class="condition"></span>
+                <img class="condition" src="" alt="Weather condition icon">
+            </div>
+            <div id="temperature">
+                <p id="farenheit">
+                    <span>Temperature(F)</span>
+                    <span class="temp"></span><br>
+                    <span>Feels like:</span>
+                    <span class="temp"></span>
+                </p>
+                <p id="celsius">
+                    <span>Temperature(C)</span>
+                    <span class="temp"></span><br>
+                    <span>Feels like:</span>
+                    <span class="temp"></span>
+                </p>
+            </div>
+            <div id="humidity">
+                <p>Humidity: 
+                    <span class="humidity-data"></span>
+                </p>
+            </div>
     </main>  
 </body>
 </html>

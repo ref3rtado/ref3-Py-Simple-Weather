@@ -18,34 +18,71 @@ eel.expose(getPythonData);
 function getPythonData(data) {
     let locationData = data[0];
     let quickLookData = data[1];
-    let detailedWeatherData = data[2];
+    //let detailedWeatherData = data[2];
 
-    pushLocationData(locationData);
+    let pushData = (data, parentID, childClass) => {
+        console.log("Calling pushData function for", parentID);
+        let parentHTML = document.getElementById(parentID);
+        let dataIndex = 0;
+        for (let child of parentHTML.getElementsByClassName(childClass)) {
+            if (child.tagName === "IMG") {
+                //If the child is an image, set the src attribute
+                img_url = data[dataIndex];
+                img_url = img_url.replace("//", "https://"); 
+                child.src = img_url;
+                dataIndex++;
+            }
+            child.innerHTML = data[dataIndex];
+            dataIndex++;
+            }
+        }
+    pushLocationData(locationData, pushData);
+    pushQuickWeatherData(quickLookData, pushData);
 }
+    
+
+
 
 //TODO: Research logging equivalent in JS
-function pushLocationData(locationData) {
-    //locationData is a map with arrays as values:
-        //locationData.location ==> geographic location | [0] = city, [1] = state, [2] = country
-        //locationData.local_time ==> [0] = epoch time of when data was pulled, [1] = timezone
-    console.log(
-        "Location data:", locationData, '\n',
-        "City name:", locationData.location[0], '\n',
-        "State name:", locationData.location[1], '\n',
-        "Country name:", locationData.location[2], '\n',
-    );
-    //Set up the location string to send to the HTML
-    let locationHTML = document.getElementById("location-string");
+function pushLocationData(locationData, pushData) {
+    //locationData is a map with arrays as values  
     let cityName = locationData.location[0];
     let stateName = locationData.location[1];
     let countryName = locationData.location[2];
-    let locationString = `${cityName}, ${stateName}, ${countryName}`;   
+    let locationString = `${cityName}, ${stateName}, ${countryName}`;
+    let date_time = new Date(locationData.time_checked[0] * 1000);
+    let payload = [locationString, date_time]
     
-    //TODO: Create time information container in HTML
-    //TODO: Parse time data and pass to the relevant HTML element
+    console.log(
+        "Location data:", locationData, '\n',
+        "City name:", cityName, '\n',
+        "State name:", stateName, '\n',
+        "Country name:", countryName, '\n',
+        `Time checked: ${date_time}\n`,
+    );
+    pushData(payload, "user-location", "location-data")
+}
 
-    //Pass data to the HTML element
-    locationHTML.innerHTML = locationString;
+function pushQuickWeatherData(quickLookData, pushData) {
+    //condition[0] is string, [1] is an image
+    let condition = quickLookData.overall_condition;
+    let temperatureData = [
+        quickLookData.temperature[2], 
+        quickLookData.temperature[3],
+        quickLookData.temperature[0],
+        quickLookData.temperature[1],
+    ];
+    let humidity = quickLookData.humidity;
+    console.log(
+        "Quick weather data:", quickLookData, '\n',
+        "Condition:", condition, '\n',
+        "Temperature (F):", temperatureData[0], '\n',
+        "Temperature (C):", temperatureData[2], '\n',
+        "Humidity:", humidity, '\n',
+    );
+    pushData(condition, "weather-condition", "condition")
+    pushData(temperatureData, "temperature", "temp");
+    pushData(humidity, "humidity", "humidity-data");
 }
 
 let zipButton = document.getElementById("get-weather")

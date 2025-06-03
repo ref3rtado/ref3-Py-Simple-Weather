@@ -40,8 +40,8 @@ def parse_json(raw_json):
         raw_json['location']['region'], 
         raw_json['location']['country']
         ]
-    location_info['local_time'] = [
-        raw_json['location']['localtime_epoch'],
+    location_info['time_checked'] = [
+        raw_json['current']['last_updated_epoch'],
         raw_json['location']['tz_id']
         ]
     quick_look_weather['temperature'] = [
@@ -54,12 +54,12 @@ def parse_json(raw_json):
         raw_json['current']['condition']['text'], 
         raw_json['current']['condition']['icon']
         ]
-    quick_look_weather['wind'] = [
+    quick_look_weather['humidity'] = [
+        raw_json['current']['humidity'], 
+        ]
+    detailed_weather['wind'] = [
         raw_json['current']['wind_mph'],
         raw_json['current']['wind_dir']
-        ]
-    detailed_weather['humidity'] = [
-        raw_json['current']['humidity'], 
         ]
     detailed_weather['precipitation'] = [
         raw_json['current']['precip_mm'], 
