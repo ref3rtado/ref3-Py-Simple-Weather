@@ -8,17 +8,17 @@ async function poke_snake() {
     console.log("Response from Python:", response);
     document.getElementById("test-display").innerHTML = response;
 }
-//TODO: Add some form of input validation
+// Passes zipcode value to Python after validating
 function passZipcode(zipcode) {
     eel.get_zipcode(zipcode);
 }
 
-//Currently just passing location data for testing purposes
 eel.expose(getPythonData);
 function getPythonData(data) {
     let locationData = data[0];
     let quickLookData = data[1];
-    //let detailedWeatherData = data[2];
+    // TODO: Add detailed weather data in later version
+    // let detailedWeatherData = data[2];
 
     let pushData = (data, parentID, childClass) => {
         console.log("Calling pushData function for", parentID);
@@ -26,7 +26,7 @@ function getPythonData(data) {
         let dataIndex = 0;
         for (let child of parentHTML.getElementsByClassName(childClass)) {
             if (child.tagName === "IMG") {
-                //If the child is an image, set the src attribute
+                // If the child is an image, set the src attribute
                 img_url = data[dataIndex];
                 img_url = img_url.replace("//", "https://"); 
                 child.src = img_url;
@@ -40,12 +40,8 @@ function getPythonData(data) {
     pushQuickWeatherData(quickLookData, pushData);
 }
     
-
-
-
-//TODO: Research logging equivalent in JS
 function pushLocationData(locationData, pushData) {
-    //locationData is a map with arrays as values  
+    // locationData is a map with arrays as values  
     let cityName = locationData.location[0];
     let stateName = locationData.location[1];
     let countryName = locationData.location[2];
@@ -64,7 +60,7 @@ function pushLocationData(locationData, pushData) {
 }
 
 function pushQuickWeatherData(quickLookData, pushData) {
-    //condition[0] is string, [1] is an image
+    // condition[0] is string, [1] is an image
     let condition = quickLookData.overall_condition;
     let temperatureData = [
         quickLookData.temperature[2], 
@@ -88,7 +84,7 @@ function pushQuickWeatherData(quickLookData, pushData) {
 function passZipcode(zipcode) {
     let zip = document.getElementById("zipcode").value;
     zip.trim();
-    if (/\d{5}/.test(zip)) {
+    if (/\d{5}/.test(zip)) { // Regular expression to check for 5 sequential digits
         console.log("Valid zipcode:", zip);
         eel.get_zipcode(zip)();
     }
@@ -105,8 +101,8 @@ function validateZipcode(zipcode) {
         passZipcode(zipcode);
     }
 }
+// Event listeners
 let zipButton = document.getElementById("get-weather")
-
 zipButton.addEventListener("click", function(event) {
     let zipcodeInput = document.getElementById("zipcode").value;
     event.preventDefault(); // Don't reload the page on button click
