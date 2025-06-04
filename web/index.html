@@ -3,10 +3,58 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Simple Weather Eel App</title>
+    <title>Simple Weather Eel GUI</title>
     <link rel="stylesheet" href="styles.css">
+    <script type="text/javascript" src="/eel.js"></script>
+    <script src="script.js" defer></script>
 </head>
+
 <body>
-    <h1>Hello World</h1>
+    <header>
+        <div id="title">
+            <h1>Simple Weather App</h1>
+            <h2>JavaScript/HTML/CSS --- Eel --- Python</h2>
+        </div>
+        <span id="input-field">
+            <label for="zipcode">Zipcode:</label>
+            <input type="text" id="zipcode" placeholder="12345" required>
+            <button id="get-weather">Get Weather</button>
+        </span>
+    </header>
+    <main>
+        <div id="user-location">
+            <h2 id="location">
+                <span id="location-string" class="location-data"></span>
+            </h2>  
+            <h3 id="time-data">Last Updated:
+                <span id="time-string" class="location-data"></span>
+            </h3>
+        </div>
+        <div id="quick-weather">
+            <h2>Weather</h2>
+            <div id="weather-condition">
+                <span class="condition"></span>
+                <img class="condition" src="" alt="Weather condition icon">
+            </div>
+            <div id="temperature">
+                <p id="farenheit">
+                    <span>Temperature(F):</span>
+                    <span class="temp"></span><br>
+                    <span>Feels like:</span>
+                    <span class="temp"></span>
+                </p>
+                <p id="celsius">
+                    <span>Temperature(C):</span>
+                    <span class="temp"></span><br>
+                    <span>Feels like:</span>
+                    <span class="temp"></span>
+                </p>
+            </div>
+            <div id="humidity">
+                <p>Humidity: 
+                    <span class="humidity-data"></span>
+                </p>
+            </div>
+    </main>  
 </body>
 </html>

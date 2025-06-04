@@ -1,4 +1,37 @@
-h1 {
-    color: blue;
-    font-size: 2em;
+header {
+    display: flex;
+    flex-direction: column;
+    background-color: aqua;
+    padding: 10px;
+    border: 1px solid black;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+}
+header h1 {
+    align-self: center;
+    top: 10px;
+    margin-left: 60px;
+    margin-bottom: 0px;
+    margin-top: 10px;
+    font-size: 40px;
+    text-shadow: 0 0 5px rgba(0, 0, 0, 0.5);
+    color: bisque;
+}
+header h2 {
+    align-self: center;
+    position: relative;
+    top: 5px;
+    margin-left: 60px;
+    margin-top: 5px;
+    font-size: 18px;
+    color: rgb(211, 206, 199);
+    text-shadow: 0 0 5px rgba(0, 0, 0, 0.5);
+}
+#input-field {
+    position: relative;
+    left: 60px;
+    margin-bottom: 8px;
+}
+main {
+    margin: 10px;
 }
