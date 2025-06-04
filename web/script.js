@@ -85,8 +85,37 @@ function pushQuickWeatherData(quickLookData, pushData) {
     pushData(humidity, "humidity", "humidity-data");
 }
 
+function passZipcode(zipcode) {
+    let zip = document.getElementById("zipcode").value;
+    zip.trim();
+    if (/\d{5}/.test(zip)) {
+        console.log("Valid zipcode:", zip);
+        eel.get_zipcode(zip)();
+    }
+    else {
+        console.log("Invalid zipcode:", zip);
+        alert("Please enter a valid 5-digit zipcode.");
+    }
+}
+
+function validateZipcode(zipcode) {
+    // Check if the zipcode is a 5-digit number
+    if (/^\d{5}$/.test(zipcode)) {
+        console.log("Valid zipcode:", zipcode);
+        passZipcode(zipcode);
+    }
+}
 let zipButton = document.getElementById("get-weather")
-    .addEventListener("click", function() {
-        let zip = document.getElementById("zipcode").value;
-        passZipcode(zip);
-    });  
+
+zipButton.addEventListener("click", function(event) {
+    let zipcodeInput = document.getElementById("zipcode").value;
+    event.preventDefault(); // Don't reload the page on button click
+    validateZipcode(zipcodeInput);
+})
+document.addEventListener("keydown", function(event) {
+    if (event.key === "Enter") {
+        let zipcodeInput = document.getElementById("zipcode").value;
+        event.preventDefault(); // Don't reload the page on Enter key
+        validateZipcode(zipcodeInput);
+    }
+})
