@@ -22,6 +22,7 @@ No sytling.
 Requires your own API key.
 
 --Next Tasks--
+Add optional zipcode keyword argument, allowing the creation a .bat desktop shortcut that quickly pulls up current weather data.
 Add more weather details. Wind speed direction, atmospheric pressure, precipitation chance/amount...
 Add a drop down selector for options like 10-day forcast, hourly forcasts, etc. 
 Add some basic CSS styling.
